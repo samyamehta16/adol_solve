@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adol_solve</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2; /* Light gray background */
+            color: #333; /* Dark text color */
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #007bff; /* Blue color for the navigation bar */
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white; /* White text color for navigation links */
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline; /* Underline on hover for better visual feedback */
+        }
+        .content-container {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'Home' %}">Home</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout_user' %}">Logout</a>
+            <a href="{% url 'solve_problem' %}">Adol_Solve</a>
+            <a href="{% url 'task_list'%}">Adol_Fun</a>
+            <a href="{% url 'Contact' %}">Contact Us</a>
+        {% else %}
+            <a href="{% url 'login_user' %}">Login</a>
+            <a href="{% url 'register_user' %}">Register</a>
+        {% endif %}
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

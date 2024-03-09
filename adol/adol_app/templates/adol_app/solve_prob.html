@@ -1,0 +1,7 @@
+{%extends 'adol_app/base.html'%}
+{%block content%}
+<h1>Have a query use adolsolve to create your own query or look at other queries</h1>
+<a href={% url 'post_new' %}>Create</a>
+<h1>Check out other questions of other users</h1>
+<a href={% url 'post_list'%}>Check out</a>
+{%endblock%}

@@ -1,0 +1,46 @@
+<!-- yourappname/templates/task_list.html -->
+{%extends 'adol_app/base.html'%}
+{%block content%}
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+    <!-- Include Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Lets have fun solving some tasks</h1>
+        <h1>Task List</h1>
+        <p>Progress: {{ progress }}%</p>
+        <!-- Add Bootstrap progress bar -->
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <div>
+            <h2>Completed Tasks</h2>
+            {% for task in completed_tasks %}
+                <p>{{ task.title }}</p>
+            {% endfor %}
+        </div>
+        <div>
+            <h2>Remaining Tasks</h2>
+            <form method="post" action="{% url 'complete_task' %}">
+                {% csrf_token %}
+                {% for task in remaining_tasks %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="task" value="{{ task.title }}" id="task{{ task.id }}">
+                        <label class="form-check-label" for="task{{ task.id }}">
+                            {{ task.title }}
+                        </label>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Complete Selected Tasks</button>
+            </form>
+        </div>
+    </div>
+    <!-- Include Bootstrap JS and Popper.js scripts here -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+{%endblock%}
